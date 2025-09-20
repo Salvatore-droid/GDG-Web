@@ -40,7 +40,7 @@
             padding: 0 20px;
         }
         
-        /* Header Styles */
+        /* Fixed Header Styles */
         header {
             background: linear-gradient(135deg, var(--dark-blue) 0%, var(--light-blue) 100%);
             color: white;
@@ -58,30 +58,41 @@
             align-items: center;
         }
         
-        .logo {
+        .logo-container {
             display: flex;
             align-items: center;
-            flex-direction: row;
-            height: 50px;
-            width: 50px;
+            gap: 15px;
         }
         
+        .logo-img {
+            width: 50px;
+            height: 50px;
+            background-color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 20px;
+            color: var(--dark-blue);
+        }
         
         .logo-text {
             display: flex;
-            flex-direction: row;
-            gap: 20px;
+            flex-direction: column;
         }
         
         .logo-text h1 {
             font-family: 'Product Sans', sans-serif;
             font-size: 22px;
             font-weight: 700;
+            line-height: 1.2;
         }
         
         .logo-text p {
-            font-size: 14px;
+            font-size: 12px;
             opacity: 0.9;
+            margin-top: 2px;
         }
         
         nav ul {
@@ -90,13 +101,14 @@
         }
         
         nav ul li {
-            margin-left: 25px;
+            margin-left: 20px;
         }
         
         nav ul li a {
             color: white;
             text-decoration: none;
             font-weight: 500;
+            font-size: 16px;
             transition: color 0.3s;
             position: relative;
             padding: 5px 0;
@@ -120,6 +132,29 @@
         nav ul li a:hover::after {
             width: 100%;
         }
+        
+        /* Mobile menu button (hidden by default) */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 30px;
+            height: 25px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+        }
+        
+        .menu-toggle span {
+            width: 100%;
+            height: 3px;
+            background-color: white;
+            border-radius: 5px;
+            transition: all 0.3s linear;
+        }
+        
+        /* Rest of your CSS remains the same until the media queries */
         
         /* Hero Section */
         .hero {
@@ -477,28 +512,84 @@
             }
         }
         
-        /* Responsive Design */
+        
+        /* Updated Responsive Design */
+        @media (max-width: 992px) {
+            nav ul li {
+                margin-left: 15px;
+            }
+            
+            nav ul li a {
+                font-size: 15px;
+            }
+        }
+        
         @media (max-width: 768px) {
             .header-content {
-                flex-direction: column;
+                flex-wrap: wrap;
+            }
+            
+            .menu-toggle {
+                display: flex;
+            }
+            
+            nav {
+                width: 100%;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease-in-out;
+            }
+            
+            nav.active {
+                max-height: 300px;
             }
             
             nav ul {
-                margin-top: 15px;
-                flex-wrap: wrap;
-                justify-content: center;
+                flex-direction: column;
+                padding: 20px 0;
+                width: 100%;
             }
             
             nav ul li {
-                margin: 5px 10px;
+                margin: 10px 0;
+                text-align: center;
+                width: 100%;
+            }
+            
+            .logo-text h1 {
+                font-size: 18px;
+            }
+            
+            .logo-text p {
+                font-size: 11px;
             }
             
             .hero h2 {
-                font-size: 2.5rem;
+                font-size: 2.2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .logo-container {
+                gap: 10px;
             }
             
-            .hero p {
-                font-size: 1rem;
+            .logo-img {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
+            
+            .logo-text h1 {
+                font-size: 16px;
+            }
+            
+            .logo-text p {
+                font-size: 10px;
+            }
+            
+            .header-content {
+                padding: 10px 0;
             }
         }
     </style>
@@ -507,14 +598,21 @@
     <!-- Header -->
     <header>
         <div class="container header-content">
-            <div class="logo">
-                <img src="gdg.png" alt="">
+            <div class="logo-container">
+                <div class="logo-img">G</div>
                 <div class="logo-text">
-                    <h1>GDG</h1>
+                    <h1>GDG Rongo</h1>
                     <p>Google Developers Group</p>
                 </div>
             </div>
-            <nav>
+            
+            <button class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
+            <nav id="mainNav">
                 <ul>
                     <li><a href="index.html">Home</a></li>
                     <li><a href="leader.html">Leaders</a></li>
@@ -527,6 +625,7 @@
         </div>
     </header>
 
+    <!-- Rest of your HTML remains the same -->
     <!-- Hero Section -->
     <section class="hero">
         <div class="container hero-content">
@@ -645,10 +744,8 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-logo">
-                    <div class="logo">
-                        <div class="logo-img">
-                            <span>G</span>
-                        </div>
+                    <div class="logo-container">
+                        <div class="logo-img">G</div>
                         <div class="logo-text">
                             <h1>GDG Rongo University</h1>
                             <p>Google Developers Group</p>
@@ -688,6 +785,24 @@
     </footer>
 
     <script>
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const mainNav = document.getElementById('mainNav');
+        
+        menuToggle.addEventListener('click', function() {
+            mainNav.classList.toggle('active');
+        });
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const isClickInsideNav = mainNav.contains(event.target);
+            const isClickOnToggle = menuToggle.contains(event.target);
+            
+            if (!isClickInsideNav && !isClickOnToggle && mainNav.classList.contains('active')) {
+                mainNav.classList.remove('active');
+            }
+        });
+
         // Simple animation for page elements
         document.addEventListener('DOMContentLoaded', function() {
             const features = document.querySelectorAll('.feature-card');
