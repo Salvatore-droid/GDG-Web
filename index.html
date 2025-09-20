@@ -67,14 +67,15 @@
         .logo-img {
             width: 50px;
             height: 50px;
-            background-color: white;
-            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: bold;
-            font-size: 20px;
-            color: var(--dark-blue);
+        }
+        
+        .logo-img img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
         }
         
         .logo-text {
@@ -153,8 +154,6 @@
             border-radius: 5px;
             transition: all 0.3s linear;
         }
-        
-        /* Rest of your CSS remains the same until the media queries */
         
         /* Hero Section */
         .hero {
@@ -395,7 +394,7 @@
             flex-direction: column;
         }
         
-        .footer-logo .logo {
+        .footer-logo .logo-container {
             margin-bottom: 15px;
         }
         
@@ -512,7 +511,6 @@
             }
         }
         
-        
         /* Updated Responsive Design */
         @media (max-width: 992px) {
             nav ul li {
@@ -577,7 +575,6 @@
             .logo-img {
                 width: 40px;
                 height: 40px;
-                font-size: 16px;
             }
             
             .logo-text h1 {
@@ -599,7 +596,9 @@
     <header>
         <div class="container header-content">
             <div class="logo-container">
-                <div class="logo-img">G</div>
+                <div class="logo-img">
+                    <img src="gdg.png" alt="GDG Rongo University Logo">
+                </div>
                 <div class="logo-text">
                     <h1>GDG Rongo</h1>
                     <p>Google Developers Group</p>
@@ -625,7 +624,6 @@
         </div>
     </header>
 
-    <!-- Rest of your HTML remains the same -->
     <!-- Hero Section -->
     <section class="hero">
         <div class="container hero-content">
@@ -745,7 +743,9 @@
             <div class="footer-content">
                 <div class="footer-logo">
                     <div class="logo-container">
-                        <div class="logo-img">G</div>
+                        <div class="logo-img">
+                            <img src="https://gdgrongo.university/assets/images/gdg-rongo-logo.png" alt="GDG Rongo University Logo">
+                        </div>
                         <div class="logo-text">
                             <h1>GDG Rongo University</h1>
                             <p>Google Developers Group</p>
